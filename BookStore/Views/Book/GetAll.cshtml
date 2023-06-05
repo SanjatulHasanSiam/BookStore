@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookStore.Models.Domain.Book>
+
+@if (TempData["msg"] != null)
+{
+    <div class="form-group">
+        <h3>@TempData["msg"]</h3>
+    </div>
+}
+<div class="container pt-5">
+   
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row-2 pt-3 pb-3">
+                    <h1>Book List</h1>
+                    <a class="btn btn-primary" asp-controller="Book" asp-action="Add">Add Book</a>
+            </div>
+          
+            <table class="table table-striped table-bordered table-dark">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Genre</th>
+                        <th>ISBN</th>
+                        <th>Total Pages</th>
+                        <th>Publisher</th>
+                        <th>Author</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.GenreName</td>
+                            <td>@item.Isbn</td>
+                            <td>@item.TotalPage</td>
+                            <td>@item.PublisherName</td>
+                            <td>@item.AuthorName</td>
+                            <td>
+                                <a class="btn btn-success" href="/Book/Update?id=@item.Id">Edit</a>
+                                <a class="btn btn-danger" onclick="return window.confirm('Are you sure ?')" href="/Book/Delete?id=@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
